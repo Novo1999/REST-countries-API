@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
 
 * {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -13,14 +13,14 @@ $light-mode-text: hsl(200, 15%, 8%);
 $light-mode-input: hsl(0, 0%, 52%);
 $light-mode-bg: hsl(0, 0%, 98%);
 $dark-text-light-el: hsl(0, 0%, 100%);
-
+$box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
 .navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 5rem 2.1rem 5rem;
   height: 5rem;
-  box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
+  box-shadow: $box-shadow;
   background-color: $dark-text-light-el;
   button {
     background: none;
@@ -32,7 +32,7 @@ $dark-text-light-el: hsl(0, 0%, 100%);
 }
 .flags {
   position: absolute;
-  top: 10rem;
+  top: 14rem;
   bottom: 0;
   left: 6rem;
   right: 0;
@@ -45,14 +45,15 @@ $dark-text-light-el: hsl(0, 0%, 100%);
   li {
     width: 20rem;
     height: 22rem;
-    box-shadow: rgba(149, 157, 165, 0.418) 0px 8px 24px;
+    box-shadow: $box-shadow;
     border-radius: 0.5rem;
     margin-left: 1rem;
+    cursor: pointer;
   }
   img {
     width: 20rem;
-    height: 13rem;
-    object-fit: cover;
+    height: 12rem;
+    // object-fit: cover;
     border-radius: 0.4rem 0.4rem 0 0;
   }
   h1 {
@@ -69,5 +70,31 @@ $dark-text-light-el: hsl(0, 0%, 100%);
   }
   .list-info {
     padding: 1rem 0 0 1.5rem;
+  }
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 2rem 0 0 7rem;
+  input {
+    padding: 10px;
+    height: 4rem;
+    width: 30rem;
+    font-size: 20px;
+    background-color: $light-mode-bg;
+    border: none;
+    box-shadow: $box-shadow;
+    border-radius: 0.4rem;
+  }
+  select {
+    width: 15rem;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    option {
+      font-weight: 600;
+    }
   }
 }

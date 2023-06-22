@@ -14,6 +14,7 @@ $light-mode-input: hsl(0, 0%, 52%);
 $light-mode-bg: hsl(0, 0%, 98%);
 $dark-text-light-el: hsl(0, 0%, 100%);
 $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
+
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -21,14 +22,19 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
   padding: 2rem 5rem 2.1rem 5rem;
   height: 5rem;
   box-shadow: $box-shadow;
-  background-color: $dark-text-light-el;
+  background-color: $dark-mode-elements;
+  color: $dark-text-light-el;
   button {
     background: none;
     border: none;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
+    color: $dark-text-light-el;
   }
+}
+body {
+  background-color: $dark-mode-bg;
 }
 .flags {
   position: absolute;
@@ -44,12 +50,14 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 3rem;
   list-style-type: none;
+  color: $dark-text-light-el;
   li {
     width: 15rem;
     height: 20rem;
     box-shadow: $box-shadow;
     border-radius: 0.5rem;
     cursor: pointer;
+    background-color: $dark-mode-elements;
   }
   img {
     width: 15rem;
@@ -83,16 +91,22 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
     height: 2rem;
     width: 30rem;
     font-size: 15px;
-    background-color: $light-mode-bg;
+    background-color: $dark-mode-elements;
     border: none;
     box-shadow: $box-shadow;
     border-radius: 0.4rem;
+    color: $dark-text-light-el;
+  }
+  ::placeholder {
+    color: $dark-text-light-el;
   }
   select {
     width: 15rem;
     padding: 10px;
     cursor: pointer;
     font-weight: 600;
+    background-color: $dark-mode-elements;
+    color: $dark-text-light-el;
     option {
       font-weight: 600;
       font-size: 20px;
@@ -119,18 +133,20 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
   top: 55rem;
   left: 94rem;
   button {
+    background-color: $dark-mode-elements;
+    color: $dark-text-light-el;
     background: none;
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    box-shadow: $box-shadow;
+    box-shadow: $dark-text-light-el 0 0 5px 1px;
     border-radius: 0.5rem;
     width: 2rem;
   }
   button:hover {
     transform: translateY(2);
-    background-color: $light-mode-text;
-    color: $light-mode-bg;
+    background-color: $dark-text-light-el;
+    color: $dark-mode-elements;
     transition: all 0.3s linear;
   }
 }

@@ -1,6 +1,6 @@
 import View from './views/View.js';
 import { pagination } from './views/paginationView.js';
-const view = new View();
+import { view } from './views/View.js';
 
 export const state = {
   country: {},

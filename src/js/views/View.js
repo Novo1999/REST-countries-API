@@ -1,6 +1,6 @@
 import { init, state } from '../model';
 
-export default class View {
+class View {
   _parentElement = document.querySelector('.flag-items');
 
   renderCountries(img, name, population, region, capital) {
@@ -30,3 +30,25 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 }
+
+export const view = new View();
+
+// Toggle Dark Mode
+const style1 = document.getElementById('styleLight');
+const style2 = document.getElementById('styleDark');
+
+function toggleDarkMode() {
+  setTimeout(() => {
+    if (style1.hasAttribute('disabled')) {
+      style1.removeAttribute('disabled');
+      style2.setAttribute('disabled', '');
+    } else {
+      style1.setAttribute('disabled', '');
+      style2.removeAttribute('disabled');
+    }
+  }, 100);
+}
+
+const dark = document.querySelector('.dark');
+
+dark.addEventListener('click', toggleDarkMode);

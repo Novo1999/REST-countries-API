@@ -1,16 +1,20 @@
 import View from './View';
 import { init } from '../model';
+import { view } from './View.js';
 
-const view = new View();
 const btns = document.querySelector('.pagination');
 let btnValue = document.querySelectorAll('.btn-value');
 
 let currPage = 1;
+let prevBtn = document.querySelector('.btn-prev');
+prevBtn.style.visibility = 'hidden';
+let totalPages;
 
 export function pagination(data) {
   let countriesPerPage = 10;
   let totalItems = data.length;
-  let totalPages = Math.ceil(totalItems / countriesPerPage);
+  totalPages = Math.ceil(totalItems / countriesPerPage);
+  console.log(totalPages);
   showSpecificPage(data, countriesPerPage);
   btns.addEventListener('click', e => {
     if (e.target.classList.contains('btn-prev')) {
@@ -19,24 +23,32 @@ export function pagination(data) {
     }
 
     if (e.target.classList.contains('btn-next')) {
-      if (currPage !== totalPages - 1) {
+      console.log(currPage);
+
+      if (currPage < totalPages) {
         showNextPage();
         updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
       }
     }
     btnValue = document.querySelectorAll('.btn-value');
+    prevBtn = document.querySelector('.btn-prev');
+    const nextBtn = document.querySelector('.btn-next');
+    if (currPage === totalPages) nextBtn.style.display = 'none';
+
+    if (currPage === 1) prevBtn.style.visibility = 'hidden';
+
     showSpecificPage(data, countriesPerPage);
   });
 
-  function showPreviousPage() {
-    currPage--;
-    if (currPage >= 1) {
+  function showNextPage() {
+    currPage++;
+    if (currPage <= totalPages) {
       showPage(data, currPage, countriesPerPage);
     }
   }
-  function showNextPage() {
-    currPage++;
-    if (currPage < totalPages) {
+  function showPreviousPage() {
+    currPage--;
+    if (currPage >= 1) {
       showPage(data, currPage, countriesPerPage);
     }
   }
@@ -76,7 +88,7 @@ btnValue.forEach(value => btnValueArray.push(+value.innerHTML));
 
 function updateButtons(e, btn1, btn2, btn3) {
   if (e.target.classList.contains('btn-next')) {
-    if (btn3 === 25) return;
+    if (btn3 === totalPages) return;
     btn1++;
     btn2++;
     btn3++;

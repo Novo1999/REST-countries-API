@@ -32,28 +32,28 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
 }
 .flags {
   position: absolute;
-  top: 14rem;
+  top: 11rem;
   bottom: 0;
   left: 6rem;
   right: 0;
+  margin: auto;
+  width: 90rem;
 }
 .flag-items {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   row-gap: 3rem;
   list-style-type: none;
   li {
-    width: 20rem;
-    height: 22rem;
+    width: 15rem;
+    height: 20rem;
     box-shadow: $box-shadow;
     border-radius: 0.5rem;
-    margin-left: 1rem;
     cursor: pointer;
   }
   img {
-    width: 20rem;
-    height: 12rem;
-    // object-fit: cover;
+    width: 15rem;
+    height: 9.3rem;
     border-radius: 0.4rem 0.4rem 0 0;
   }
   h1 {
@@ -80,7 +80,7 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
   margin: 2rem 0 0 7rem;
   input {
     padding: 10px;
-    height: 4rem;
+    height: 2rem;
     width: 30rem;
     font-size: 20px;
     background-color: $light-mode-bg;
@@ -97,5 +97,38 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
       font-weight: 600;
       font-size: 20px;
     }
+  }
+}
+
+.error {
+  h1 {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 10rem;
+    left: 0;
+    right: 7rem;
+    // margin: 15rem 0 20rem 40rem;
+  }
+}
+.pagination {
+  position: absolute;
+  top: 55rem;
+  left: 94rem;
+  button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    box-shadow: $box-shadow;
+    border-radius: 0.5rem;
+    width: 2rem;
+  }
+  button:hover {
+    transform: translateY(2);
+    transition: all 0.3s linear;
   }
 }

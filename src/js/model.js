@@ -1,31 +1,37 @@
 import View from './views/View.js';
-
+import { pagination } from './views/paginationView.js';
 const view = new View();
 
 export const state = {
   country: {},
+  resultsPerPage: 10,
 };
 
 export async function init(countries) {
   try {
-    const fetchPro = await fetch(
-      `https://restcountries.com/v3.1/alpha?codes=${countries}`
-    );
-    const data = await fetchPro.json();
-    state.country = data;
+    const fetchPro = await fetch(`https://restcountries.com/v3.1/${countries}`);
+    if (!fetchPro.ok) throw new Error('Something went wrong!');
 
-    data.forEach(country =>
-      view.renderCountries(
-        country.flags.png,
-        country.name.common,
-        country.population,
-        country.region,
-        country.capital
-      )
-    );
+    const data = await fetchPro.json();
+
+    state.country = data;
+    data
+      .slice(0, state.resultsPerPage)
+      .forEach(country =>
+        view.renderCountries(
+          country.flags.png,
+          country.name.common,
+          country.population,
+          country.region,
+          country.capital
+        )
+      );
+    // Pagination
+    pagination(data);
   } catch (err) {
-    console.error('💥💥', err);
+    view.renderError();
+    console.error('💥💥 Could not load country', err);
   }
 }
 
-init('bd');
+init('all');

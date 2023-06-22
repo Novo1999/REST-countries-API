@@ -21,4 +21,12 @@ export default class View {
         </li>`;
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
+
+  renderError() {
+    const markup = `
+    <div class="error">
+      <h1>Something went wrong ❗ Please try again 😟</h1>
+    </div>`;
+    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
 }

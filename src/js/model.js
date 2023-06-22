@@ -30,7 +30,7 @@ export async function init(countries) {
     pagination(data);
   } catch (err) {
     view.renderError();
-    console.error('💥💥 Could not load country', err);
+    console.error('💥💥 Something went wrong', err);
   }
 }
 

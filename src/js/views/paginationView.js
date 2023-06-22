@@ -1,23 +1,17 @@
 import View from './View';
 import { init } from '../model';
 
-// import { state } from '../model';
-
 const view = new View();
 const btns = document.querySelector('.pagination');
-const btnValue = document.querySelectorAll('.btn-value');
+let btnValue = document.querySelectorAll('.btn-value');
 
-let btnValueArray = [];
-
-btnValue.forEach(value => btnValueArray.push(+value.innerHTML));
-
-console.log(btnValueArray);
+let currPage = 1;
 
 export function pagination(data) {
-  let currPage = 1;
   let countriesPerPage = 10;
   let totalItems = data.length;
   let totalPages = Math.ceil(totalItems / countriesPerPage);
+  showSpecificPage(data, countriesPerPage);
   btns.addEventListener('click', e => {
     if (e.target.classList.contains('btn-prev')) {
       if (currPage !== 1) showPreviousPage();
@@ -30,9 +24,8 @@ export function pagination(data) {
         updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
       }
     }
-    if (e.target.innerHTML === '3') {
-      showPage(data, 3, countriesPerPage);
-    }
+    btnValue = document.querySelectorAll('.btn-value');
+    showSpecificPage(data, countriesPerPage);
   });
 
   function showPreviousPage() {
@@ -66,6 +59,21 @@ function showPage(data, currPage, countriesPerPage) {
     );
 }
 
+function showSpecificPage(data, countriesPerPage) {
+  btnValue.forEach(btn =>
+    btn.addEventListener('click', e => {
+      currPage = +e.target.innerHTML;
+      e.stopPropagation();
+      showPage(data, e.target.innerHTML, countriesPerPage);
+    })
+  );
+}
+
+// Update pagination buttons
+let btnValueArray = [];
+
+btnValue.forEach(value => btnValueArray.push(+value.innerHTML));
+
 function updateButtons(e, btn1, btn2, btn3) {
   if (e.target.classList.contains('btn-next')) {
     if (btn3 === 25) return;
@@ -83,9 +91,9 @@ function updateButtons(e, btn1, btn2, btn3) {
   }
   const markup = `
   <button class="btn-prev">&larr;</button>
-  <button>${btn1}</button>
-  <button>${btn2}</button>
-  <button>${btn3}</button>
+  <button class="btn-value">${btn1}</button>
+  <button class="btn-value">${btn2}</button>
+  <button class="btn-value">${btn3}</button>
   <button class="btn-next">&rarr;</button>`;
   btns.innerHTML = markup;
 }

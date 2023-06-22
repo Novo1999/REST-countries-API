@@ -32,9 +32,25 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
     font-size: 1rem;
     color: $dark-text-light-el;
   }
+  .dark:hover {
+    transition: all 0.3s linear;
+    transform: translateY(3);
+  }
 }
 body {
   background-color: $dark-mode-bg;
+  animation: opacity 1 linear 0.3s;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .flags {
   position: absolute;

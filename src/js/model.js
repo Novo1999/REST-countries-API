@@ -1,9 +1,8 @@
-import View from './views/View.js';
-import { pagination } from './views/paginationView.js';
-import { view } from './views/View.js';
+import { pagination } from './views/paginationView';
+import { view } from './views/View';
+import { regionView } from './views/regionView';
 
 export const state = {
-  country: {},
   resultsPerPage: 10,
 };
 
@@ -14,7 +13,6 @@ export async function init(countries) {
 
     const data = await fetchPro.json();
 
-    state.country = data;
     data
       .slice(0, state.resultsPerPage)
       .forEach(country =>

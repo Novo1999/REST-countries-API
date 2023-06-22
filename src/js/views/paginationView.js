@@ -1,8 +1,6 @@
-import View from './View';
-import { init } from '../model';
-import { view } from './View.js';
+import { view } from './View';
 
-const btns = document.querySelector('.pagination');
+export const pagBtn = document.querySelector('.pagination');
 let btnValue = document.querySelectorAll('.btn-value');
 
 let currPage = 1;
@@ -14,17 +12,14 @@ export function pagination(data) {
   let countriesPerPage = 10;
   let totalItems = data.length;
   totalPages = Math.ceil(totalItems / countriesPerPage);
-  console.log(totalPages);
   showSpecificPage(data, countriesPerPage);
-  btns.addEventListener('click', e => {
+  pagBtn.addEventListener('click', e => {
     if (e.target.classList.contains('btn-prev')) {
       if (currPage !== 1) showPreviousPage();
       updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
     }
 
     if (e.target.classList.contains('btn-next')) {
-      console.log(currPage);
-
       if (currPage < totalPages) {
         showNextPage();
         updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
@@ -107,5 +102,5 @@ function updateButtons(e, btn1, btn2, btn3) {
   <button class="btn-value">${btn2}</button>
   <button class="btn-value">${btn3}</button>
   <button class="btn-next">&rarr;</button>`;
-  btns.innerHTML = markup;
+  pagBtn.innerHTML = markup;
 }

@@ -14,6 +14,7 @@ $light-mode-input: hsl(0, 0%, 52%);
 $light-mode-bg: hsl(0, 0%, 98%);
 $dark-text-light-el: hsl(0, 0%, 100%);
 $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
+
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -28,6 +29,25 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
+  }
+  .dark:hover {
+    transition: all 0.3s linear;
+    transform: translateY(3);
+  }
+}
+body {
+  background-color: $light-mode-bg;
+  animation: opacity 1 linear 0.3s;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .flags {

@@ -1,6 +1,6 @@
 import { init, state } from '../model';
 
-class View {
+export default class View {
   _parentElement = document.querySelector('.flag-items');
 
   renderCountries(img, name, population, region, capital) {
@@ -14,7 +14,11 @@ class View {
             />
             <div class="list-info">
                 <h1>${name}</h1>
-                <h4>Population: <span>${population}</span></h4>
+                <h4>Population: <span>${
+                  population.toString().length > 6
+                    ? population / 1000000 + 'M'
+                    : population
+                }</span></h4>
                 <h4>Region: <span>${region}</span></h4>
                 <h4>Capital: <span>${capital}</span></h4>
             </div>
@@ -46,9 +50,12 @@ function toggleDarkMode() {
       style1.setAttribute('disabled', '');
       style2.removeAttribute('disabled');
     }
-  }, 100);
+  }, 1);
 }
 
 const dark = document.querySelector('.dark');
-
-dark.addEventListener('click', toggleDarkMode);
+const moon = document.querySelector('.moon');
+dark.addEventListener('click', () => {
+  toggleDarkMode();
+  moon.innerHTML !== '🌞' ? (moon.innerHTML = '🌞') : (moon.innerHTML = '🌙');
+});

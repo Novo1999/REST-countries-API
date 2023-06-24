@@ -53,6 +53,7 @@ function toggleDarkMode() {
   }, 1);
 }
 
+// Dark mode emoji
 const dark = document.querySelector('.dark');
 const moon = document.querySelector('.moon');
 dark.addEventListener('click', () => {

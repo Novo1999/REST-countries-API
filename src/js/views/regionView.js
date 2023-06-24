@@ -1,66 +1,33 @@
 import { view } from './View';
-import View from './View';
-import { pagBtn, pagination } from './paginationView';
-import { init } from '../model';
+import { pagBtn } from './paginationView';
+import { getData } from '../model';
 
-// https://restcountries.com/v3.1/region/{region}
-
-class RegionView extends View {
-  constructor(region) {
-    super();
-    this.region = region;
-  }
-
-  async fetchRegion() {
-    this._parentElement.innerHTML = '';
-    try {
-      const data = await fetch(
-        `https://restcountries.com/v3.1/region/${this.region}`
-      );
-
-      this._dataJSON = await data.json();
-
-      this.renderRegionCountry(this._dataJSON);
-      pagination(this._dataJSON);
-    } catch (err) {
-      console.error('Something Went Wrong 💥💥', err);
+export function regionFilter(data) {
+  const filterOption = document.getElementById('region');
+  filterOption.addEventListener('change', () => {
+    if (filterOption.value === 'default') {
+      view._parentElement.innerHTML = '';
+      getData(data);
+      pagBtn.style.visibility = 'visible';
+    } else {
+      view._parentElement.innerHTML = '';
+      filterCountries(data, filterOption.value);
     }
-  }
-
-  renderRegionCountry(data) {
-    data
-      .slice(0, 10)
-      .forEach(country =>
-        view.renderCountries(
-          country.flags.png,
-          country.name.common,
-          country.population,
-          country.region,
-          country.capital
-        )
-      );
-  }
+  });
 }
 
-//
-
-// Getting value from dropdown menu
-
-function renderFilteredCountries(region) {
-  const regionView = new RegionView(region);
-  regionView.fetchRegion();
-}
-
-const filterOption = document.getElementById('region');
-
-// Render filtered countries
-
-filterOption.addEventListener('change', () => {
+function filterCountries(data, region) {
   view._parentElement.innerHTML = '';
-  if (filterOption.value) {
-    renderFilteredCountries(filterOption.value);
-  }
-  if (filterOption.value === 'Filter by Region') {
-    init('all');
-  }
-});
+  data
+    .filter(country => region === country.region)
+    .forEach(country =>
+      view.renderCountries(
+        country.flags.png,
+        country.name.common,
+        country.population,
+        country.region,
+        country.capital
+      )
+    );
+  pagBtn.style.visibility = 'hidden';
+}

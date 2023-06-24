@@ -3,7 +3,7 @@ import { view } from './View';
 export const pagBtn = document.querySelector('.pagination');
 let btnValue = document.querySelectorAll('.btn-value');
 
-let currPage = 1;
+export let currPage = 1;
 let prevBtn = document.querySelector('.btn-prev');
 prevBtn.style.visibility = 'hidden';
 let totalPages;
@@ -12,22 +12,26 @@ export function pagination(data) {
   let countriesPerPage = 10;
   let totalItems = data.length;
   totalPages = Math.ceil(totalItems / countriesPerPage);
-  showSpecificPage(data, countriesPerPage);
+  console.log(totalPages);
   pagBtn.addEventListener('click', e => {
-    if (e.target.classList.contains('btn-prev')) {
-      if (currPage !== 1) showPreviousPage();
+    if (e.target.classList.contains('btn-prev') && currPage !== 1) {
+      e.stopImmediatePropagation();
+      showPreviousPage();
       updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
+      console.log(currPage);
     }
 
-    if (e.target.classList.contains('btn-next')) {
-      if (currPage < totalPages) {
-        showNextPage();
-        updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
-      }
+    if (e.target.classList.contains('btn-next') && currPage < totalPages) {
+      e.stopImmediatePropagation();
+      showNextPage();
+      updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
+      console.log(currPage);
     }
+
     btnValue = document.querySelectorAll('.btn-value');
     prevBtn = document.querySelector('.btn-prev');
     const nextBtn = document.querySelector('.btn-next');
+
     if (currPage === totalPages) nextBtn.style.display = 'none';
 
     if (currPage === 1) prevBtn.style.visibility = 'hidden';
@@ -49,7 +53,7 @@ export function pagination(data) {
   }
 }
 
-function showPage(data, currPage, countriesPerPage) {
+export function showPage(data, currPage, countriesPerPage) {
   const start = (currPage - 1) * countriesPerPage;
   const end = start + countriesPerPage;
   view._parentElement.innerHTML = '';
@@ -66,22 +70,23 @@ function showPage(data, currPage, countriesPerPage) {
     );
 }
 
-function showSpecificPage(data, countriesPerPage) {
+export function showSpecificPage(data, countriesPerPage) {
   btnValue.forEach(btn =>
     btn.addEventListener('click', e => {
+      e.stopImmediatePropagation();
       currPage = +e.target.innerHTML;
-      e.stopPropagation();
-      showPage(data, e.target.innerHTML, countriesPerPage);
+      console.log(currPage);
+      showPage(data, currPage, countriesPerPage);
     })
   );
 }
 
 // Update pagination buttons
-let btnValueArray = [];
+export let btnValueArray = [];
 
 btnValue.forEach(value => btnValueArray.push(+value.innerHTML));
 
-function updateButtons(e, btn1, btn2, btn3) {
+export function updateButtons(e, btn1, btn2, btn3) {
   if (e.target.classList.contains('btn-next')) {
     if (btn3 === totalPages) return;
     btn1++;

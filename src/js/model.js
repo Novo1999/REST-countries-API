@@ -23,7 +23,7 @@ export async function init(countries) {
   try {
     const fetchPro = await fetch(`https://restcountries.com/v3.1/${countries}`);
     if (!fetchPro.ok) throw new Error('Something went wrong!');
-    spinner.style.dispaly = 'block';
+    // spinner.style.display = 'block';
     const data = await fetchPro.json();
     console.log(data);
     getData(data);

@@ -1,6 +1,8 @@
 import { view } from './View';
-import { pagBtn } from './paginationView';
+import { currPage, pagBtn } from './paginationView';
 import { getData } from '../model';
+import { showPage } from './paginationView';
+import { state } from '../model';
 
 export function regionFilter(data) {
   const filterOption = document.getElementById('region');
@@ -8,6 +10,7 @@ export function regionFilter(data) {
     if (filterOption.value === 'default') {
       view._parentElement.innerHTML = '';
       getData(data);
+      showPage(data, currPage, state.resultsPerPage);
       pagBtn.style.visibility = 'visible';
     } else {
       view._parentElement.innerHTML = '';

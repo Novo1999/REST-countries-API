@@ -25,7 +25,6 @@ export function pagination(data) {
       e.stopImmediatePropagation();
       showNextPage();
       updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
-      console.log(currPage);
     }
 
     btnValue = document.querySelectorAll('.btn-value');
@@ -41,6 +40,7 @@ export function pagination(data) {
 
   function showNextPage() {
     currPage++;
+    console.log(currPage);
     if (currPage <= totalPages) {
       showPage(data, currPage, countriesPerPage);
     }

@@ -1,6 +1,7 @@
 import { pagBtn, pagination } from './views/paginationView';
 import { view } from './views/View';
 import { regionFilter } from './views/regionView';
+const spinner = document.querySelector('.spinner');
 export const state = {
   resultsPerPage: 10,
 };
@@ -22,7 +23,7 @@ export async function init(countries) {
   try {
     const fetchPro = await fetch(`https://restcountries.com/v3.1/${countries}`);
     if (!fetchPro.ok) throw new Error('Something went wrong!');
-
+    spinner.style.dispaly = 'block';
     const data = await fetchPro.json();
     console.log(data);
     getData(data);

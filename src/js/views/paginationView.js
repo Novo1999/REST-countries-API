@@ -35,6 +35,8 @@ export function pagination(data) {
     if (currPage === 1) prevBtn.style.visibility = 'hidden';
 
     showSpecificPage(data, countriesPerPage);
+
+    buttonBg();
   });
 
   function showNextPage() {
@@ -104,4 +106,18 @@ export function updateButtons(e, btn1, btn2, btn3) {
   <button class="btn-value">${btn3}</button>
   <button class="btn-next">&rarr;</button>`;
   pagBtn.innerHTML = markup;
+  btnValue = document.querySelectorAll('.btn-value');
+  buttonBg();
 }
+
+// Adding a page indicator
+
+function buttonBg() {
+  btnValue.forEach(btn =>
+    currPage === +btn.textContent
+      ? btn.classList.add('active')
+      : btn.classList.remove('active')
+  );
+}
+
+buttonBg();

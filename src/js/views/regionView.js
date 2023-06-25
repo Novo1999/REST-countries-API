@@ -8,6 +8,7 @@ import { backBtn } from './searchView';
 export const filterOption = document.getElementById('region');
 export function regionFilter(data) {
   filterOption.addEventListener('change', () => {
+    backBtn.style.display = 'block';
     if (filterOption.value === 'default') {
       backBtn.style.display = 'none';
       view._parentElement.innerHTML = '';

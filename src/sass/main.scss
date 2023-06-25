@@ -192,6 +192,9 @@ body {
     color: $light-mode-bg;
     transition: all 0.3s linear;
   }
+  .active {
+    box-shadow: 0 0 3px 3px inset rgba(0, 255, 13, 0.822);
+  }
 }
 
 .spinner {

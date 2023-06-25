@@ -14,7 +14,7 @@ export function regionFilter(data) {
       pagBtn.style.visibility = 'visible';
     } else {
       view._parentElement.innerHTML = '';
-      filterCountries(data, filterOption.value);
+      setTimeout(() => filterCountries(data, filterOption.value), 500);
     }
   });
 }

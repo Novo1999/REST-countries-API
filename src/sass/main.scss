@@ -108,6 +108,21 @@ body {
     box-shadow: $box-shadow;
     border-radius: 0.4rem;
   }
+  .submit-btn {
+    width: 70px;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+  }
+  .submit-btn:hover {
+    transition: 0.3s all linear;
+    background-color: black;
+    box-shadow: 0 0 5px 0.5px black;
+    color: white;
+  }
   select {
     width: 15rem;
     padding: 10px;
@@ -119,6 +134,25 @@ body {
       font-size: 20px;
     }
   }
+}
+
+.back-btn {
+  position: absolute;
+  left: 4%;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: none;
+}
+.back-btn:hover {
+  transition: 0.3s all linear;
+  background-color: black;
+  box-shadow: 0 0 5px 0.5px black;
+  color: white;
 }
 
 .error {

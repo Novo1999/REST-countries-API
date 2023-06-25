@@ -1,7 +1,12 @@
-import { pagBtn, pagination } from './views/paginationView';
+import {
+  currPage,
+  pagBtn,
+  pagination,
+  showSpecificPage,
+} from './views/paginationView';
 import { view } from './views/View';
 import { regionFilter } from './views/regionView';
-const spinner = document.querySelector('.spinner');
+import SearchView, { searchView } from './views/searchView';
 export const state = {
   resultsPerPage: 10,
 };
@@ -23,17 +28,19 @@ export async function init(countries) {
   try {
     const fetchPro = await fetch(`https://restcountries.com/v3.1/${countries}`);
     if (!fetchPro.ok) throw new Error('Something went wrong!');
-    // spinner.style.display = 'block';
     const data = await fetchPro.json();
-    console.log(data);
     getData(data);
-
+    console.log(data);
+    showSpecificPage(data, state.resultsPerPage);
     // Pagination
     pagination(data);
     regionFilter(data);
+    searchView.searchByCountry(data);
+    searchView.backButton(data, currPage, state.resultsPerPage);
   } catch (err) {
     view.renderError();
     console.error('💥💥 Something went wrong', err);
   }
 }
+
 init('all');

@@ -116,6 +116,21 @@ body {
   ::placeholder {
     color: $dark-text-light-el;
   }
+  .submit-btn {
+    width: 70px;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .submit-btn:hover {
+    transition: 0.3s all linear;
+    background-color: white;
+    box-shadow: 0 0 5px 0.5px white;
+    color: black;
+  }
   select {
     width: 15rem;
     padding: 10px;
@@ -130,7 +145,24 @@ body {
     }
   }
 }
-
+.back-btn {
+  position: absolute;
+  left: 4%;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: none;
+}
+.back-btn:hover {
+  transition: 0.3s all linear;
+  background-color: white;
+  box-shadow: 0 0 5px 0.5px white;
+  color: black;
+}
 .error {
   h1 {
     font-size: 20px;
@@ -179,6 +211,7 @@ body {
   background-color: red;
   border-radius: 50%;
   animation: loading 0.5s infinite linear;
+  display: none;
 }
 
 @keyframes loading {

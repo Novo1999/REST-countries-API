@@ -1,3 +1,4 @@
+import { state } from '../model';
 import { view } from './View';
 
 export const pagBtn = document.querySelector('.pagination');
@@ -12,13 +13,11 @@ export function pagination(data) {
   let countriesPerPage = 10;
   let totalItems = data.length;
   totalPages = Math.ceil(totalItems / countriesPerPage);
-  console.log(totalPages);
   pagBtn.addEventListener('click', e => {
     if (e.target.classList.contains('btn-prev') && currPage !== 1) {
       e.stopImmediatePropagation();
       showPreviousPage();
       updateButtons(e, btnValueArray[0], btnValueArray[1], btnValueArray[2]);
-      console.log(currPage);
     }
 
     if (e.target.classList.contains('btn-next') && currPage < totalPages) {
@@ -40,7 +39,6 @@ export function pagination(data) {
 
   function showNextPage() {
     currPage++;
-    console.log(currPage);
     if (currPage <= totalPages) {
       showPage(data, currPage, countriesPerPage);
     }
@@ -73,9 +71,7 @@ export function showPage(data, currPage, countriesPerPage) {
 export function showSpecificPage(data, countriesPerPage) {
   btnValue.forEach(btn =>
     btn.addEventListener('click', e => {
-      e.stopImmediatePropagation();
       currPage = +e.target.innerHTML;
-      console.log(currPage);
       showPage(data, currPage, countriesPerPage);
     })
   );

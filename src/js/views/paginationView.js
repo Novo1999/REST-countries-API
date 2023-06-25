@@ -1,5 +1,6 @@
 import { state } from '../model';
 import { view } from './View';
+import { favoriteCountryMark } from './View';
 
 export const pagBtn = document.querySelector('.pagination');
 let btnValue = document.querySelectorAll('.btn-value');
@@ -37,6 +38,7 @@ export function pagination(data) {
     showSpecificPage(data, countriesPerPage);
 
     buttonBg();
+    favoriteCountryMark();
   });
 
   function showNextPage() {

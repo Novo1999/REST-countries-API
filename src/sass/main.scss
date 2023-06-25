@@ -95,6 +95,13 @@ body {
   .list-info {
     padding: 1rem 0 0 1.5rem;
   }
+  .star {
+    height: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+  }
 }
 
 .filter {

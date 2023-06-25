@@ -2,6 +2,7 @@ import { view } from './View';
 import { getData } from '../model';
 import { currPage, showPage, showSpecificPage, pagBtn } from './paginationView';
 import { filterOption } from './regionView';
+import { favoriteCountryMark } from './View';
 
 const submitBtn = document.querySelector('.submit-btn');
 const search = document.getElementById('search');
@@ -31,6 +32,7 @@ export default class SearchView {
           }
         });
         search.value = '';
+        favoriteCountryMark();
       }
     });
   }
@@ -42,6 +44,7 @@ export default class SearchView {
       backBtn.style.display = 'none';
       pagBtn.style.visibility = 'visible';
       filterOption.innerHTML = this.filterMarkup;
+      favoriteCountryMark();
     });
   }
 

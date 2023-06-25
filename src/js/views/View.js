@@ -6,6 +6,7 @@ export default class View {
   renderCountries(img, name, population, region, capital) {
     const markup = `
       <ul class="flag-items">
+      <button class="fa fa-star-o fa-star star"></button>
         <li class="list-div">
             <img
                 class="flag-img"
@@ -67,9 +68,18 @@ function countryResize() {
   const list = document.querySelectorAll('.list-info');
   list.forEach(list => {
     const height = list.offsetHeight;
-    console.log(height);
     if (height > 111) {
       list.closest('.list-div').style.height = 21 + 'rem';
     }
   });
+}
+
+// Favorite country indicator
+export function favoriteCountryMark() {
+  const favorite = document.querySelectorAll('.star');
+  favorite.forEach(star =>
+    star.addEventListener('click', e => {
+      e.currentTarget.classList.toggle('fa-star-o');
+    })
+  );
 }

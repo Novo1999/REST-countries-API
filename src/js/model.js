@@ -4,7 +4,7 @@ import {
   pagination,
   showSpecificPage,
 } from './views/paginationView';
-import { view } from './views/View';
+import { favoriteCountryMark, view } from './views/View';
 import { regionFilter } from './views/regionView';
 import SearchView, { searchView } from './views/searchView';
 export const state = {
@@ -38,6 +38,7 @@ export async function init(countries) {
     searchView.searchByCountry(data);
     console.log(currPage);
     searchView.backButton(data, state.resultsPerPage);
+    favoriteCountryMark();
   } catch (err) {
     view.renderError();
     console.error('💥💥 Something went wrong', err);

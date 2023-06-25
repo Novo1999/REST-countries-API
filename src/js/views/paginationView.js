@@ -10,7 +10,7 @@ prevBtn.style.visibility = 'hidden';
 let totalPages;
 
 export function pagination(data) {
-  let countriesPerPage = 10;
+  let countriesPerPage = state.resultsPerPage;
   let totalItems = data.length;
   totalPages = Math.ceil(totalItems / countriesPerPage);
   pagBtn.addEventListener('click', e => {

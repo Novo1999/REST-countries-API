@@ -36,7 +36,8 @@ export async function init(countries) {
     pagination(data);
     regionFilter(data);
     searchView.searchByCountry(data);
-    searchView.backButton(data, currPage, state.resultsPerPage);
+    console.log(currPage);
+    searchView.backButton(data, state.resultsPerPage);
   } catch (err) {
     view.renderError();
     console.error('💥💥 Something went wrong', err);

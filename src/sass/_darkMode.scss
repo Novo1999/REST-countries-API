@@ -75,6 +75,10 @@ body {
     cursor: pointer;
     background-color: $dark-mode-elements;
   }
+  li:hover {
+    transition: linear all 0.3s;
+    box-shadow: 0 0 3px 1px white;
+  }
   img {
     width: 15rem;
     height: 9.3rem;

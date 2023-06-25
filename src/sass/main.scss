@@ -71,6 +71,10 @@ body {
     border-radius: 0.5rem;
     cursor: pointer;
   }
+  li:hover {
+    transition: linear all 0.3s;
+    box-shadow: 0 0 3px 1px rgb(0, 0, 0);
+  }
   img {
     width: 15rem;
     height: 9.3rem;

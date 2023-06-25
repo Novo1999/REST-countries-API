@@ -3,11 +3,13 @@ import { currPage, pagBtn } from './paginationView';
 import { getData } from '../model';
 import { showPage } from './paginationView';
 import { state } from '../model';
+import { backBtn } from './searchView';
 
+export const filterOption = document.getElementById('region');
 export function regionFilter(data) {
-  const filterOption = document.getElementById('region');
   filterOption.addEventListener('change', () => {
     if (filterOption.value === 'default') {
+      backBtn.style.display = 'none';
       view._parentElement.innerHTML = '';
       getData(data);
       showPage(data, currPage, state.resultsPerPage);

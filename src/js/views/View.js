@@ -6,7 +6,7 @@ export default class View {
   renderCountries(img, name, population, region, capital) {
     const markup = `
       <ul class="flag-items">
-        <li>
+        <li class="list-div">
             <img
                 class="flag-img"
                 src="${img}"
@@ -24,6 +24,7 @@ export default class View {
             </div>
         </li>`;
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    countryResize();
   }
 
   renderError() {
@@ -60,3 +61,15 @@ dark.addEventListener('click', () => {
   toggleDarkMode();
   moon.innerHTML !== '🌞' ? (moon.innerHTML = '🌞') : (moon.innerHTML = '🌙');
 });
+
+// resizing the country divs (for those countries having large names)
+function countryResize() {
+  const list = document.querySelectorAll('.list-info');
+  list.forEach(list => {
+    const height = list.offsetHeight;
+    console.log(height);
+    if (height > 111) {
+      list.closest('.list-div').style.height = 21 + 'rem';
+    }
+  });
+}

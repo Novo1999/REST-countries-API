@@ -4,7 +4,8 @@ import { getData } from '../model';
 import { showPage } from './paginationView';
 import { state } from '../model';
 import { backBtn } from './searchView';
-import { favoriteCountryMark } from './View';
+import { favoriteCountryMark } from './favoritesView';
+
 export const filterOption = document.getElementById('region');
 export function regionFilter(data) {
   filterOption.addEventListener('change', () => {

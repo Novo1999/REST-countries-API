@@ -100,11 +100,17 @@ body {
     padding: 1rem 0 0 1.5rem;
   }
   .star {
+    position: relative;
+    left: 10px;
     height: 1.5rem;
     background: none;
     border: none;
     cursor: pointer;
     color: white;
+  }
+  .title {
+    display: flex;
+    width: 12rem;
   }
 }
 

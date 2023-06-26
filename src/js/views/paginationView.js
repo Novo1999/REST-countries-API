@@ -1,6 +1,6 @@
 import { state } from '../model';
 import { view } from './View';
-import { favoriteCountryMark } from './View';
+import { favoriteCountryMark } from './favoritesView';
 
 export const pagBtn = document.querySelector('.pagination');
 let btnValue = document.querySelectorAll('.btn-value');

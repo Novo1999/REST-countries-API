@@ -2,7 +2,7 @@ import { view } from './View';
 import { getData } from '../model';
 import { currPage, showPage, showSpecificPage, pagBtn } from './paginationView';
 import { filterOption } from './regionView';
-import { favoriteCountryMark } from './View';
+import { favoriteCountryMark } from './favoritesView';
 
 const submitBtn = document.querySelector('.submit-btn');
 const search = document.getElementById('search');

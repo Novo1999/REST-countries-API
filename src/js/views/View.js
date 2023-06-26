@@ -1,12 +1,13 @@
 import { init, state } from '../model';
-
+import { favPopUp, favoriteCountryMark } from './favoritesView';
+import { navigation } from './favoritesView';
 export default class View {
   _parentElement = document.querySelector('.flag-items');
 
   renderCountries(img, name, population, region, capital) {
     const markup = `
       <ul class="flag-items">
-      <button class="fa fa-star-o fa-star star"></button>
+      
         <li class="list-div">
             <img
                 class="flag-img"
@@ -14,7 +15,10 @@ export default class View {
                 alt="flag-image"
             />
             <div class="list-info">
-                <h1>${name}</h1>
+            <div class="title">
+            <h1 class="name">${name}</h1>
+            <button class="fa fa-star-o fa-star star"></button>
+            </div>
                 <h4>Population: <span>${
                   population.toString().length > 6
                     ? population / 1000000 + 'M'
@@ -26,6 +30,7 @@ export default class View {
         </li>`;
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
     countryResize();
+    favPopUp.style.display = 'none';
   }
 
   renderError() {
@@ -72,14 +77,4 @@ function countryResize() {
       list.closest('.list-div').style.height = 21 + 'rem';
     }
   });
-}
-
-// Favorite country indicator
-export function favoriteCountryMark() {
-  const favorite = document.querySelectorAll('.star');
-  favorite.forEach(star =>
-    star.addEventListener('click', e => {
-      e.currentTarget.classList.toggle('fa-star-o');
-    })
-  );
 }

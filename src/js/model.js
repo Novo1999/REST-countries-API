@@ -4,9 +4,11 @@ import {
   pagination,
   showSpecificPage,
 } from './views/paginationView';
-import { favoriteCountryMark, view } from './views/View';
+import { view } from './views/View';
 import { regionFilter } from './views/regionView';
 import SearchView, { searchView } from './views/searchView';
+import { favoriteCountryMark } from './views/favoritesView';
+
 export const state = {
   resultsPerPage: 10,
 };

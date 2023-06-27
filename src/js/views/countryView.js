@@ -21,7 +21,8 @@ export function countryView(
   cap,
   domain,
   currency,
-  lang
+  lang,
+  border
 ) {
   view._parentElement.innerHTML = '';
   const markup = `
@@ -33,7 +34,7 @@ export function countryView(
     <div class="country-details">
       <div>
         <h1 class="country-name">${name}</h1>
-        <p><span class="bold">Native Name:</span>${
+        <p class=" native"><span class="bold">Native Name:</span>${
           native ? Object.entries(native)[0][1].official : 'N/A'
         }</p>
         <p><span class="bold">Population:</span>${
@@ -48,22 +49,38 @@ export function countryView(
         <p><span class="bold">Currencies:</span>${
           currency ? Object.entries(currency)[0][1].name : 'N/A'
         }</p>
-        <p><span class="bold">Languages:</span>${
+        <p class="language"><span class="bold">Languages:</span>${
           lang ? Object.values(lang).join(', ') : 'N/A'
         }</p>
       </div>
-      <div>
+      <div class="border-div">
+      <span class="bold">Border Countries:</span>
         <p class="borders">
-          <span class="bold">Border Countries:</span>
-          <span class="border-country">France</span>
+       
         </p>
       </div>
     </div>
   </div>`;
+
   country.style.display = 'flex';
   country.innerHTML = markup;
   pagBtn.style.display = 'none';
   filterOption.style.display = 'none';
+
+  `<span class="border-country">${
+    border ? borderCountries(border) : 'N/A'
+  }</span>`;
+}
+
+function borderCountries(border) {
+  const borderCountry = document.querySelector('.borders');
+  border.forEach(border => {
+    const newBorder = document.createElement('span');
+    newBorder.className = 'border-country';
+    const borderContent = document.createTextNode(border);
+    newBorder.appendChild(borderContent);
+    borderCountry.appendChild(newBorder);
+  });
 }
 
 // Event listener on each country item
@@ -88,7 +105,8 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
             country.capital,
             country.tld,
             country.currencies,
-            country.languages
+            country.languages,
+            country.borders
           );
           const back = document.querySelector('.back');
           const countryViews = document.querySelector('.country-view');
@@ -97,11 +115,14 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
           back.addEventListener('click', () => {
             countryViews.innerHTML = '';
             countryViews.style.display = 'none';
-            getData(data);
+            // getData(data);
             showSpecificPage(data, countriesPerPage);
             showPage(data, currPage, countriesPerPage);
             renderSelectedCountry(countryData, data, countriesPerPage);
+            regionFilter(data);
             filterCountries(data, filterOption.value);
+            // initFavorites(favoriteState);
+            // favoriteCountryMark();
 
             filterOption.style.display = 'block';
 
@@ -109,18 +130,17 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
               ? (backBtn.style.display = 'none')
               : (backBtn.style.display = 'block');
 
-            favoriteCountryMark();
-            initFavorites(favoriteState);
-            regionFilter(data);
             if (filterOption.value === 'default') {
               backBtn.style.display = 'block';
               pagBtn.style.display = 'block';
-            }
-            if (filterOption.value !== 'default') {
+            } else {
               backBtn.style.display = 'block';
+              searchState.status = false;
             }
-            if (searchState.status === true) {
+            if (searchState.status) {
               renderSearch(data, searchState.text);
+            } else {
+              regionFilter(data);
             }
           });
         }

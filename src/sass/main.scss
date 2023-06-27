@@ -240,9 +240,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
+  display: none;
+  animation: opacity 1 linear 0.3s;
 }
-
 .country-view {
   .back {
     position: absolute;
@@ -263,30 +264,34 @@ body {
   }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10rem;
+  // gap: 5rem;
   align-items: center;
   color: $light-mode-text;
   line-height: 30px;
   margin-left: 4rem;
   img {
-    width: 45rem;
-    height: 30rem;
+    width: 40rem;
+    height: 28rem;
   }
   .country-name {
     margin-bottom: 2rem;
   }
   .border-country {
     margin-left: 20px;
-    background-color: $dark-text-light-el;
+    background-color: $dark-mode-elements;
     padding: 5px 20px 5px 20px;
     box-shadow: rgba(0, 0, 0, 0.432) 0 0 5px 2px;
     border-radius: 2px;
+    line-height: 50px;
+  }
+  .border-div {
+    width: 40rem;
   }
   .country-details {
     display: flex;
     flex-wrap: wrap;
-    width: 45rem;
-    gap: 8rem;
+    width: 50rem;
+    gap: 4rem;
     .det-2 {
       margin-top: 4rem;
     }

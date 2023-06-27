@@ -45,7 +45,7 @@ export async function init(countries) {
     if (!fetchPro.ok) throw new Error('Something went wrong!');
     const data = await fetchPro.json();
     getData(data);
-    console.log(data);
+    console.table(data);
     showSpecificPage(data, state.resultsPerPage);
     // Pagination
     pagination(data);

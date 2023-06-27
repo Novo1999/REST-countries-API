@@ -6,7 +6,7 @@ import {
   initFavorites,
   storage,
 } from './favoritesView';
-
+import { renderSelectedCountry } from './countryView';
 export const pagBtn = document.querySelector('.pagination');
 let btnValue = document.querySelectorAll('.btn-value');
 
@@ -45,6 +45,7 @@ export function pagination(data) {
     buttonBg();
     favoriteCountryMark();
     initFavorites(favoriteState);
+    renderSelectedCountry(data, data, countriesPerPage);
   });
 
   function showNextPage() {

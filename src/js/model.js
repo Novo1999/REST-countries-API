@@ -12,11 +12,15 @@ import {
   initFavorites,
   storage,
 } from './views/favoritesView';
-import { countryView, renderSelectedCountry } from './views/countryView';
+import {
+  countryView,
+  renderSelectedCountry,
+  countryBack,
+} from './views/countryView';
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 export const state = {
   resultsPerPage: 10,
@@ -34,7 +38,6 @@ export function getData(data) {
         country.capital
       )
     );
-  renderSelectedCountry(data);
 }
 export async function init(countries) {
   try {
@@ -51,6 +54,7 @@ export async function init(countries) {
     console.log(currPage);
     searchView.backButton(data, state.resultsPerPage);
     favoriteCountryMark();
+    renderSelectedCountry(data, data, state.resultsPerPage);
   } catch (err) {
     view.renderError();
     console.error('💥💥 Something went wrong', err);

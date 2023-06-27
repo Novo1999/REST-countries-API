@@ -7,6 +7,7 @@ import {
   favoriteState,
   initFavorites,
 } from './favoritesView';
+import { renderSelectedCountry } from './countryView';
 
 const submitBtn = document.querySelector('.submit-btn');
 const search = document.getElementById('search');
@@ -40,6 +41,7 @@ export default class SearchView {
         search.value = '';
         favoriteCountryMark();
         initFavorites(favoriteState);
+        renderSelectedCountry(data);
       }
     });
   }
@@ -53,6 +55,7 @@ export default class SearchView {
       filterOption.innerHTML = this.filterMarkup;
       favoriteCountryMark();
       initFavorites(favoriteState);
+      renderSelectedCountry(data);
     });
   }
 

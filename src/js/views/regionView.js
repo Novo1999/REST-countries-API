@@ -9,6 +9,7 @@ import {
   favoriteState,
   initFavorites,
 } from './favoritesView';
+import { renderSelectedCountry } from './countryView';
 
 export const filterOption = document.getElementById('region');
 export function regionFilter(data) {
@@ -45,4 +46,5 @@ function filterCountries(data, region) {
   pagBtn.style.visibility = 'hidden';
   favoriteCountryMark();
   initFavorites(favoriteState);
+  renderSelectedCountry(data);
 }

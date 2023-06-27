@@ -1,5 +1,13 @@
 import { view } from './View';
-
+import { pagBtn } from './paginationView';
+import { filterOption } from './regionView';
+import { getData } from '../model';
+import { showPage, currPage, showSpecificPage } from './paginationView';
+import {
+  favoriteCountryMark,
+  initFavorites,
+  favoriteState,
+} from './favoritesView';
 const country = document.querySelector('.grid-items');
 
 export function countryView(
@@ -27,15 +35,17 @@ export function countryView(
         <p><span class="bold">Native Name:</span>${
           Object.entries(native)[0][1].official
         }</p>
-        <p><span class="bold">Population:</span>${pop}</p>
+        <p><span class="bold">Population:</span>${
+          pop.toString().length > 6 ? pop / 1000000 + 'M' : pop
+        }</p>
         <p><span class="bold">Region:</span>${reg}</p>
-        <p><span class="bold">Sub Region:</span>${sub}</p>
-        <p><span class="bold">Capital:</span>${cap}</p>
+        <p><span class="bold">Sub Region:</span>${sub ? sub : 'N/A'}</p>
+        <p><span class="bold">Capital:</span>${cap ? cap : 'N/A'}</p>
       </div>
       <div class="det-2">
-        <p><span class="bold">Top Level Domain:</span>${domain}</p>
+        <p><span class="bold">Top Level Domain:</span>${domain[0]}</p>
         <p><span class="bold">Currencies:</span>${
-          Object.entries(currency)[0][1].name
+          currency ? Object.entries(currency)[0][1].name : 'N/A'
         }</p>
         <p><span class="bold">Languages:</span>${Object.values(lang).join(
           ', '
@@ -51,18 +61,21 @@ export function countryView(
   </div>`;
   country.style.display = 'flex';
   country.innerHTML = markup;
+  pagBtn.style.visibility = 'hidden';
+  filterOption.style.visibility = 'hidden';
 }
 
 // Event listener on each country item
-export function renderSelectedCountry(countryData) {
+export function renderSelectedCountry(countryData, data, countriesPerPage) {
   const flagList = document.querySelectorAll('.list-div');
   flagList.forEach(list =>
     list.addEventListener('click', e => {
+      if (e.target.classList.contains('fa')) return;
+
       const countryName =
         e.currentTarget.childNodes[3].firstElementChild.innerText;
-      if (countryName.toLowerCase() === 'libya') {
-        countryData.forEach(country => {
-          console.log(country);
+      countryData.forEach(country => {
+        if (countryName.toLowerCase() === country.name.common.toLowerCase()) {
           countryView(
             country.flags.png,
             country.name.common,
@@ -75,8 +88,22 @@ export function renderSelectedCountry(countryData) {
             country.currencies,
             country.languages
           );
-        });
-      }
+          const back = document.querySelector('.back');
+          const countryViews = document.querySelector('.country-view');
+          back.addEventListener('click', () => {
+            countryViews.innerHTML = '';
+            countryViews.style.display = 'none';
+            // view._parentElement.innerHTML = '';
+            getData(data);
+            showSpecificPage(data, countriesPerPage);
+            pagBtn.style.visibility = 'visible';
+            favoriteCountryMark();
+            initFavorites(favoriteState);
+          });
+        }
+      });
     })
   );
 }
+
+export function countryBack(data, countriesPerPage) {}

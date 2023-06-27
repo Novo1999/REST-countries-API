@@ -250,8 +250,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
   display: none;
+  animation: opacity 1 linear 0.3s;
 }
 
 .country-view {

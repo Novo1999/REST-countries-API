@@ -1,6 +1,8 @@
 import { init, state } from '../model';
-import { favPopUp, favoriteCountryMark } from './favoritesView';
+import { countryView, renderSelectedCountry } from './countryView';
+import { favPopUp, favoriteCountryMark, initFavorites } from './favoritesView';
 import { navigation } from './favoritesView';
+
 export default class View {
   _parentElement = document.querySelector('.flag-items');
 

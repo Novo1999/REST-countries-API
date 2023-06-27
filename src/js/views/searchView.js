@@ -2,11 +2,17 @@ import { view } from './View';
 import { getData } from '../model';
 import { currPage, showPage, showSpecificPage, pagBtn } from './paginationView';
 import { filterOption } from './regionView';
-import { favoriteCountryMark } from './favoritesView';
+import {
+  favoriteCountryMark,
+  favoriteState,
+  initFavorites,
+} from './favoritesView';
 
 const submitBtn = document.querySelector('.submit-btn');
 const search = document.getElementById('search');
 export const backBtn = document.querySelector('.back-btn');
+
+// TODO add a message when the search query doesn't match
 
 export default class SearchView {
   searchByCountry(data) {
@@ -33,6 +39,7 @@ export default class SearchView {
         });
         search.value = '';
         favoriteCountryMark();
+        initFavorites(favoriteState);
       }
     });
   }
@@ -45,6 +52,7 @@ export default class SearchView {
       pagBtn.style.visibility = 'visible';
       filterOption.innerHTML = this.filterMarkup;
       favoriteCountryMark();
+      initFavorites(favoriteState);
     });
   }
 

@@ -4,7 +4,11 @@ import { getData } from '../model';
 import { showPage } from './paginationView';
 import { state } from '../model';
 import { backBtn } from './searchView';
-import { favoriteCountryMark } from './favoritesView';
+import {
+  favoriteCountryMark,
+  favoriteState,
+  initFavorites,
+} from './favoritesView';
 
 export const filterOption = document.getElementById('region');
 export function regionFilter(data) {
@@ -16,6 +20,8 @@ export function regionFilter(data) {
       getData(data);
       showPage(data, currPage, state.resultsPerPage);
       pagBtn.style.visibility = 'visible';
+      favoriteCountryMark();
+      initFavorites(favoriteState);
     } else {
       view._parentElement.innerHTML = '';
       setTimeout(() => filterCountries(data, filterOption.value), 500);
@@ -38,4 +44,5 @@ function filterCountries(data, region) {
     );
   pagBtn.style.visibility = 'hidden';
   favoriteCountryMark();
+  initFavorites(favoriteState);
 }

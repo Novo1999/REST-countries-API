@@ -30,8 +30,8 @@ export function regionFilter(data) {
   });
 }
 
-function filterCountries(data, region) {
-  view._parentElement.innerHTML = '';
+export function filterCountries(data, region) {
+  // view._parentElement.innerHTML = '';
   data
     .filter(country => region === country.region)
     .forEach(country =>
@@ -43,8 +43,8 @@ function filterCountries(data, region) {
         country.capital
       )
     );
-  pagBtn.style.visibility = 'hidden';
+  pagBtn.style.display = 'none';
   favoriteCountryMark();
   initFavorites(favoriteState);
-  renderSelectedCountry(data);
+  renderSelectedCountry(data, data, state.resultsPerPage);
 }

@@ -1,6 +1,6 @@
 import { view } from './View';
 import { pagBtn } from './paginationView';
-import { filterOption } from './regionView';
+import { filterOption, regionFilter, filterCountries } from './regionView';
 import { getData } from '../model';
 import { showPage, currPage, showSpecificPage } from './paginationView';
 import {
@@ -8,6 +8,7 @@ import {
   initFavorites,
   favoriteState,
 } from './favoritesView';
+import { backBtn, searchState, searchView, renderSearch } from './searchView';
 const country = document.querySelector('.grid-items');
 
 export function countryView(
@@ -33,7 +34,7 @@ export function countryView(
       <div>
         <h1 class="country-name">${name}</h1>
         <p><span class="bold">Native Name:</span>${
-          Object.entries(native)[0][1].official
+          native ? Object.entries(native)[0][1].official : 'N/A'
         }</p>
         <p><span class="bold">Population:</span>${
           pop.toString().length > 6 ? pop / 1000000 + 'M' : pop
@@ -47,9 +48,9 @@ export function countryView(
         <p><span class="bold">Currencies:</span>${
           currency ? Object.entries(currency)[0][1].name : 'N/A'
         }</p>
-        <p><span class="bold">Languages:</span>${Object.values(lang).join(
-          ', '
-        )}</p>
+        <p><span class="bold">Languages:</span>${
+          lang ? Object.values(lang).join(', ') : 'N/A'
+        }</p>
       </div>
       <div>
         <p class="borders">
@@ -61,8 +62,8 @@ export function countryView(
   </div>`;
   country.style.display = 'flex';
   country.innerHTML = markup;
-  pagBtn.style.visibility = 'hidden';
-  filterOption.style.visibility = 'hidden';
+  pagBtn.style.display = 'none';
+  filterOption.style.display = 'none';
 }
 
 // Event listener on each country item
@@ -71,6 +72,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
   flagList.forEach(list =>
     list.addEventListener('click', e => {
       if (e.target.classList.contains('fa')) return;
+      backBtn.style.display = 'none';
 
       const countryName =
         e.currentTarget.childNodes[3].firstElementChild.innerText;
@@ -90,15 +92,36 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
           );
           const back = document.querySelector('.back');
           const countryViews = document.querySelector('.country-view');
+
+          // back button
           back.addEventListener('click', () => {
             countryViews.innerHTML = '';
             countryViews.style.display = 'none';
-            // view._parentElement.innerHTML = '';
             getData(data);
             showSpecificPage(data, countriesPerPage);
-            pagBtn.style.visibility = 'visible';
+            showPage(data, currPage, countriesPerPage);
+            renderSelectedCountry(countryData, data, countriesPerPage);
+            filterCountries(data, filterOption.value);
+
+            filterOption.style.display = 'block';
+
+            filterOption.style.display === 'block'
+              ? (backBtn.style.display = 'none')
+              : (backBtn.style.display = 'block');
+
             favoriteCountryMark();
             initFavorites(favoriteState);
+            regionFilter(data);
+            if (filterOption.value === 'default') {
+              backBtn.style.display = 'block';
+              pagBtn.style.display = 'block';
+            }
+            if (filterOption.value !== 'default') {
+              backBtn.style.display = 'block';
+            }
+            if (searchState.status === true) {
+              renderSearch(data, searchState.text);
+            }
           });
         }
       });

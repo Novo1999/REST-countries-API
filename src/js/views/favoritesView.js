@@ -22,8 +22,8 @@ export function favoriteCountryMark() {
 
 function favoritePopup(country, e) {
   clearTimeout(timeoutID);
-  const markup1 = `<h4>${country} marked as favorite</h4>`;
-  const markup2 = `<h4>${country} unmarked from favorite</h4>`;
+  const markup1 = `<h4 class="marked">${country} marked as favorite</h4>`;
+  const markup2 = `<h4 class="marked">${country} unmarked from favorite</h4>`;
 
   if (e.currentTarget.classList.contains('fa-star')) {
     favPopUp.innerHTML = markup1;
@@ -56,7 +56,7 @@ export function initFavorites(state) {
 
 // Logic
 // ---------
-// get
+
 function addToLocalStorage(item) {
   let itemsArr = getLocalStorage();
   itemsArr.push(item);
@@ -83,12 +83,4 @@ export function renderLocalStorageFavorites() {
   initFavorites(items);
 }
 
-// All favorites are pushed into array
-
-// Array set as local storage
-
-// If favorite unmarked, array item removed and set as local storage again
-
-//
-
-//! User views the favorites using a button
+// favorites section

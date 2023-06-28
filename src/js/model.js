@@ -11,6 +11,7 @@ import {
   favoriteCountryMark,
   initFavorites,
   storage,
+  renderLocalStorageFavorites,
 } from './views/favoritesView';
 import {
   countryView,
@@ -45,16 +46,17 @@ export async function init(countries) {
     if (!fetchPro.ok) throw new Error('Something went wrong!');
     const data = await fetchPro.json();
     getData(data);
-    console.table(data);
+    console.log(data);
+
     showSpecificPage(data, state.resultsPerPage);
     // Pagination
     pagination(data);
     regionFilter(data);
     searchView.searchByCountry(data);
-    console.log(currPage);
     searchView.backButton(data, state.resultsPerPage);
     favoriteCountryMark();
     renderSelectedCountry(data, data, state.resultsPerPage);
+    renderLocalStorageFavorites();
   } catch (err) {
     view.renderError();
     console.error('💥💥 Something went wrong', err);

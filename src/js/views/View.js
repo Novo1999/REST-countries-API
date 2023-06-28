@@ -27,7 +27,7 @@ export default class View {
                     : population
                 }</span></h4>
                 <h4>Region: <span>${region}</span></h4>
-                <h4>Capital: <span>${capital ? capital : 'N/A'}</span></h4>
+                <h4>Capital: <span>${capital || 'N/A'}</span></h4>
             </div>
         </li>`;
     this._parentElement.insertAdjacentHTML('afterbegin', markup);

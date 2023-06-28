@@ -1,7 +1,7 @@
 const navigation = document.querySelector('.navigation');
 export const favPopUp = navigation.firstElementChild.nextElementSibling;
 let timeoutID;
-export const favoriteState = [];
+export let favoriteState = [];
 
 //! User marks as favorite(They can do it from the home screen, after searching or from the filtered countries)
 
@@ -27,6 +27,7 @@ function favoritePopup(country, e) {
 
   if (e.currentTarget.classList.contains('fa-star')) {
     favPopUp.innerHTML = markup1;
+    addToLocalStorage(country);
   }
   if (e.currentTarget.classList.contains('fa-star-o')) {
     favPopUp.innerHTML = markup2;
@@ -34,6 +35,7 @@ function favoritePopup(country, e) {
       e.currentTarget.previousElementSibling.innerHTML
     );
     favoriteState.splice(itemIndex);
+    deleteFromLocalStorage(country);
   }
   timeoutID = setTimeout(() => (favPopUp.style.display = 'none'), 2000);
 }
@@ -55,11 +57,30 @@ export function initFavorites(state) {
 // Logic
 // ---------
 // get
+function addToLocalStorage(item) {
+  let itemsArr = getLocalStorage();
+  itemsArr.push(item);
+  localStorage.setItem('country', JSON.stringify(itemsArr));
+}
+
+function deleteFromLocalStorage(item) {
+  let itemsArr = getLocalStorage();
+  itemsArr = itemsArr.filter(value => {
+    if (value !== item) return item;
+  });
+  localStorage.setItem('country', JSON.stringify(itemsArr));
+}
 
 function getLocalStorage() {
   return localStorage.getItem('country')
     ? JSON.parse(localStorage.getItem('country'))
     : [];
+}
+
+export function renderLocalStorageFavorites() {
+  let items = getLocalStorage();
+  favoriteState = items;
+  initFavorites(items);
 }
 
 // All favorites are pushed into array

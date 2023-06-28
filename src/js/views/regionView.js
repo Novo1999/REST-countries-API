@@ -11,10 +11,19 @@ import {
 } from './favoritesView';
 import { renderSelectedCountry } from './countryView';
 
+export const regionState = {
+  status: false,
+  text: '',
+};
+
 export const filterOption = document.getElementById('region');
 export function regionFilter(data) {
   filterOption.addEventListener('change', () => {
     backBtn.style.display = 'block';
+    regionState.status = true;
+    regionState.text = filterOption.value;
+    console.log('regionstate', regionState.status);
+    console.log(regionState.text);
     if (filterOption.value === 'default') {
       backBtn.style.display = 'none';
       view._parentElement.innerHTML = '';

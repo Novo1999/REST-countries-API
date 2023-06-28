@@ -298,13 +298,21 @@ body {
   .country-name {
     margin-bottom: 2rem;
   }
+  .borders {
+    margin-top: 20px;
+    width: 200px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    row-gap: 20px;
+  }
   .border-country {
     margin-left: 20px;
     background-color: $dark-mode-elements;
-    padding: 5px 20px 5px 20px;
+    padding: 0 10px 0 10px;
     box-shadow: rgba(0, 0, 0, 0.432) 0 0 5px 2px;
     border-radius: 2px;
-    line-height: 50px;
+    line-height: 30px;
+    font-size: 14px;
   }
   .border-div {
     width: 40rem;

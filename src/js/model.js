@@ -1,24 +1,14 @@
-import {
-  currPage,
-  pagBtn,
-  pagination,
-  showSpecificPage,
-} from './views/paginationView';
+import { pagination, showSpecificPage } from './views/paginationView';
 import { view } from './views/View';
 import { regionFilter } from './views/regionView';
 import SearchView, { searchView } from './views/searchView';
 import {
   favoriteCountryMark,
-  initFavorites,
-  storage,
+  showFavoritesState,
   renderLocalStorageFavorites,
   showFavorites,
 } from './views/favoritesView';
-import {
-  countryView,
-  renderSelectedCountry,
-  countryBack,
-} from './views/countryView';
+import { renderSelectedCountry } from './views/countryView';
 
 // if (module.hot) {
 //   module.hot.accept();

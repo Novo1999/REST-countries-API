@@ -2,16 +2,15 @@ import { view } from './View';
 import { getData } from '../model';
 import { state } from '../model';
 import { currPage, showPage, showSpecificPage, pagBtn } from './paginationView';
-import {
-  filterCountries,
-  filterOption,
-  regionFilter,
-  regionState,
-} from './regionView';
+import { filterOption } from './regionView';
 import {
   favoriteCountryMark,
   favoriteState,
+  getLocalStorage,
   initFavorites,
+  renderLocalStorageFavorites,
+  showFavorites,
+  showFavoritesState,
 } from './favoritesView';
 import { renderSelectedCountry } from './countryView';
 
@@ -42,10 +41,6 @@ export default class SearchView {
   backButton(data, countriesPerPage) {
     backBtn.addEventListener('click', () => {
       view._parentElement.innerHTML = '';
-      // FIXME
-      // if (regionState.status && searchState.status) {
-      //   filterCountries(data, regionState.text);
-      // }
       searchState.status = false;
       getData(data);
       showPage(data, currPage, countriesPerPage);
@@ -53,8 +48,9 @@ export default class SearchView {
       pagBtn.style.display = 'block';
       filterOption.innerHTML = this.filterMarkup;
       favoriteCountryMark();
-      initFavorites(favoriteState);
+      initFavorites(getLocalStorage());
       renderSelectedCountry(data, data, countriesPerPage);
+      // showFavorites(data);
     });
   }
 

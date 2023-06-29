@@ -12,6 +12,8 @@ import {
   favoriteCountryMark,
   initFavorites,
   favoriteState,
+  getLocalStorage,
+  favBtn,
 } from './favoritesView';
 import { backBtn, searchState, searchView, renderSearch } from './searchView';
 const country = document.querySelector('.grid-items');
@@ -94,6 +96,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
   const flagList = document.querySelectorAll('.list-div');
   flagList.forEach(list =>
     list.addEventListener('click', e => {
+      favBtn.style.display = 'none';
       if (e.target.classList.contains('fa')) return;
       backBtn.style.display = 'none';
 
@@ -119,6 +122,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
 
           // back button
           back.addEventListener('click', () => {
+            favBtn.style.display = 'block';
             console.log('searchState', searchState.status);
             countryViews.innerHTML = '';
             countryViews.style.display = 'none';
@@ -128,7 +132,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
             renderSelectedCountry(countryData, data, countriesPerPage);
             // regionFilter(data);
             filterCountries(data, filterOption.value);
-            // initFavorites(favoriteState);
+            initFavorites(getLocalStorage());
             // favoriteCountryMark();
 
             filterOption.style.display = 'block';
@@ -147,9 +151,6 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
             if (searchState.status && regionState.status) {
               renderSearch(data, searchState.text);
             }
-            // if (regionState.status) {
-            //   regionFilter(data);
-            // }
           });
         }
       });
@@ -157,7 +158,6 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
   );
 }
 
-// export function countryBack(data, countriesPerPage) {}
 const belgium = {
   name: 'Belgium',
   topLevelDomain: ['.be'],

@@ -67,6 +67,7 @@ body {
 }
 .flag-items {
   display: grid;
+
   grid-template-columns: repeat(5, 1fr);
   row-gap: 3rem;
   list-style-type: none;

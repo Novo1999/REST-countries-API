@@ -3,11 +3,14 @@ import { pagBtn } from './paginationView';
 import { renderSelectedCountry } from './countryView';
 import { state } from '../model';
 import { backBtn } from './searchView';
+
 const navigation = document.querySelector('.navigation');
+export const favBtn = document.querySelector('.fav');
 export const favPopUp = navigation.firstElementChild.nextElementSibling;
 let timeoutID;
 export let favoriteState = [];
-
+console.log(favoriteState);
+export let showFavoritesState = false;
 //! User marks as favorite(They can do it from the home screen, after searching or from the filtered countries)
 
 export function favoriteCountryMark() {
@@ -33,6 +36,7 @@ function favoritePopup(country, e) {
   if (e.currentTarget.classList.contains('fa-star')) {
     favPopUp.innerHTML = markup1;
     addToLocalStorage(country);
+    console.log(favoriteState);
   }
   if (e.currentTarget.classList.contains('fa-star-o')) {
     favPopUp.innerHTML = markup2;
@@ -40,8 +44,11 @@ function favoritePopup(country, e) {
       e.currentTarget.previousElementSibling.innerHTML
     );
     favoriteState.splice(itemIndex);
+    removeFavorites(e);
     deleteFromLocalStorage(country);
+    console.log(favoriteState);
   }
+
   timeoutID = setTimeout(() => (favPopUp.style.display = 'none'), 2000);
 }
 
@@ -76,7 +83,7 @@ function deleteFromLocalStorage(item) {
   localStorage.setItem('country', JSON.stringify(itemsArr));
 }
 
-function getLocalStorage() {
+export function getLocalStorage() {
   return localStorage.getItem('country')
     ? JSON.parse(localStorage.getItem('country'))
     : [];
@@ -89,32 +96,43 @@ export function renderLocalStorageFavorites() {
 }
 
 // favorites section
-export const favBtn = document.querySelector('.fav');
 
 export function showFavorites(data) {
-  let items = favoriteState;
-  console.log(items);
   favBtn.addEventListener('click', () => {
+    let items = getLocalStorage();
+    console.log(items);
+    showFavoritesState = true;
+    console.log(showFavoritesState);
     view._parentElement.innerHTML = '';
     items.forEach(item =>
       data
         .filter(country => item === country.name.common)
-        .forEach(country =>
+        .forEach(country => {
           view.renderCountries(
             country.flags.png,
             country.name.common,
             country.population,
             country.region,
             country.capital
-          )
-        )
+          );
+        })
     );
     pagBtn.style.display = 'none';
     favoriteCountryMark();
-    initFavorites(favoriteState);
+    initFavorites(items);
     renderSelectedCountry(data, data, state.resultsPerPage);
     backBtn.style.display = 'block';
+    backBtn.addEventListener('click', () => {
+      showFavoritesState = false;
+      console.log(showFavoritesState);
+    });
   });
+}
+
+export function removeFavorites(e) {
+  if (showFavoritesState && e.currentTarget.classList.contains('fa-star-o')) {
+    e.currentTarget.closest('.list-div').style.display = 'none';
+  }
 }
 
 // export function filterCountries(data, region) {

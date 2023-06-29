@@ -1,3 +1,8 @@
+import { view } from './View';
+import { pagBtn } from './paginationView';
+import { renderSelectedCountry } from './countryView';
+import { state } from '../model';
+import { backBtn } from './searchView';
 const navigation = document.querySelector('.navigation');
 export const favPopUp = navigation.firstElementChild.nextElementSibling;
 let timeoutID;
@@ -84,3 +89,49 @@ export function renderLocalStorageFavorites() {
 }
 
 // favorites section
+export const favBtn = document.querySelector('.fav');
+
+export function showFavorites(data) {
+  let items = favoriteState;
+  console.log(items);
+  favBtn.addEventListener('click', () => {
+    view._parentElement.innerHTML = '';
+    items.forEach(item =>
+      data
+        .filter(country => item === country.name.common)
+        .forEach(country =>
+          view.renderCountries(
+            country.flags.png,
+            country.name.common,
+            country.population,
+            country.region,
+            country.capital
+          )
+        )
+    );
+    pagBtn.style.display = 'none';
+    favoriteCountryMark();
+    initFavorites(favoriteState);
+    renderSelectedCountry(data, data, state.resultsPerPage);
+    backBtn.style.display = 'block';
+  });
+}
+
+// export function filterCountries(data, region) {
+// view._parentElement.innerHTML = '';
+//   data
+//     .filter(country => region === country.region)
+//     .forEach(country =>
+//       view.renderCountries(
+//         country.flags.png,
+//         country.name.common,
+//         country.population,
+//         country.region,
+//         country.capital
+//       )
+//     );
+//   pagBtn.style.display = 'none';
+//   favoriteCountryMark();
+//   initFavorites(favoriteState);
+//   renderSelectedCountry(data, data, state.resultsPerPage);
+// }

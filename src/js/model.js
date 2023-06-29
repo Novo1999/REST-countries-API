@@ -12,6 +12,7 @@ import {
   initFavorites,
   storage,
   renderLocalStorageFavorites,
+  showFavorites,
 } from './views/favoritesView';
 import {
   countryView,
@@ -49,7 +50,7 @@ export async function init(countries) {
     console.log(data);
 
     showSpecificPage(data, state.resultsPerPage);
-    // Pagination
+
     pagination(data);
     regionFilter(data);
     searchView.searchByCountry(data);
@@ -57,21 +58,11 @@ export async function init(countries) {
     favoriteCountryMark();
     renderSelectedCountry(data, data, state.resultsPerPage);
     renderLocalStorageFavorites();
+    showFavorites(data);
   } catch (err) {
     view.renderError();
     console.error('💥💥 Something went wrong', err);
   }
 }
-
-//   img,
-//   name,
-//   native,
-//   pop,
-//   reg,
-//   sub,
-//   cap,
-//   domain,
-//   currency,
-//   lang
 
 init('all');

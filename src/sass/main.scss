@@ -29,6 +29,9 @@ $box-shadow: rgba(0, 0, 0, 0.479) 0px 0.1px 5px;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.377);
+    padding: 10px;
+    border-radius: 50%;
   }
   .dark:hover {
     transition: all 0.3s linear;
@@ -158,6 +161,7 @@ body {
   margin-bottom: 10px;
   background: $dark-text-light-el;
   color: rgb(0, 0, 0);
+  box-shadow: $box-shadow;
   border-radius: 0.5rem;
   padding: 5px;
   cursor: pointer;

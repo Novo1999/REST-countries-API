@@ -38,6 +38,16 @@ export async function init(countries) {
     const data = await fetchPro.json();
     getData(data);
     console.log(data);
+    // FIXME
+    data.forEach(item => {
+      if (item.borders) {
+        let newArr = item.borders;
+        newArr.forEach(border => {
+          const combinedArr = [...border];
+          console.log(combinedArr);
+        });
+      }
+    });
 
     showSpecificPage(data, state.resultsPerPage);
 

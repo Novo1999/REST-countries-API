@@ -9,7 +9,7 @@ export const favBtn = document.querySelector('.fav');
 export const favPopUp = navigation.firstElementChild.nextElementSibling;
 let timeoutID;
 export let favoriteState = [];
-console.log(favoriteState);
+
 export let showFavoritesState = false;
 //! User marks as favorite(They can do it from the home screen, after searching or from the filtered countries)
 
@@ -134,22 +134,3 @@ export function removeFavorites(e) {
     e.currentTarget.closest('.list-div').style.display = 'none';
   }
 }
-
-// export function filterCountries(data, region) {
-// view._parentElement.innerHTML = '';
-//   data
-//     .filter(country => region === country.region)
-//     .forEach(country =>
-//       view.renderCountries(
-//         country.flags.png,
-//         country.name.common,
-//         country.population,
-//         country.region,
-//         country.capital
-//       )
-//     );
-//   pagBtn.style.display = 'none';
-//   favoriteCountryMark();
-//   initFavorites(favoriteState);
-//   renderSelectedCountry(data, data, state.resultsPerPage);
-// }

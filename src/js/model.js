@@ -1,10 +1,9 @@
 import { pagination, showSpecificPage } from './views/paginationView';
 import { view } from './views/View';
 import { regionFilter } from './views/regionView';
-import SearchView, { searchView } from './views/searchView';
+import { searchView } from './views/searchView';
 import {
   favoriteCountryMark,
-  showFavoritesState,
   renderLocalStorageFavorites,
   showFavorites,
 } from './views/favoritesView';
@@ -37,17 +36,6 @@ export async function init(countries) {
     if (!fetchPro.ok) throw new Error('Something went wrong!');
     const data = await fetchPro.json();
     getData(data);
-    console.log(data);
-    // FIXME
-    data.forEach(item => {
-      if (item.borders) {
-        let newArr = item.borders;
-        newArr.forEach(border => {
-          const combinedArr = [...border];
-          console.log(combinedArr);
-        });
-      }
-    });
 
     showSpecificPage(data, state.resultsPerPage);
 

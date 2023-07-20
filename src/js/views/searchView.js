@@ -1,7 +1,6 @@
 import { view } from './View';
-import { getData } from '../model';
-import { state } from '../model';
-import { currPage, showPage, showSpecificPage, pagBtn } from './paginationView';
+import { getData, state } from '../model';
+import { currPage, showPage, pagBtn } from './paginationView';
 import { filterOption } from './regionView';
 import {
   favoriteCountryMark,

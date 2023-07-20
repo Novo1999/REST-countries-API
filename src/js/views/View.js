@@ -1,7 +1,4 @@
-import { init, state } from '../model';
-import { countryView, renderSelectedCountry } from './countryView';
-import { favPopUp, favoriteCountryMark, initFavorites } from './favoritesView';
-import { navigation } from './favoritesView';
+import { favPopUp } from './favoritesView';
 
 export default class View {
   _parentElement = document.querySelector('.flag-items');
@@ -9,7 +6,6 @@ export default class View {
   renderCountries(img, name, population, region, capital) {
     const markup = `
       <ul class="flag-items">
-      
         <li class="list-div">
             <img
                 class="flag-img"

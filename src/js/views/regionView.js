@@ -1,8 +1,6 @@
 import { view } from './View';
-import { currPage, pagBtn } from './paginationView';
-import { getData } from '../model';
-import { showPage } from './paginationView';
-import { state } from '../model';
+import { currPage, pagBtn, showPage } from './paginationView';
+import { getData, state } from '../model';
 import { backBtn } from './searchView';
 import {
   favoriteCountryMark,

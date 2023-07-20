@@ -1,20 +1,9 @@
 import { view } from './View';
 import { pagBtn } from './paginationView';
-import {
-  filterOption,
-  regionFilter,
-  filterCountries,
-  regionState,
-} from './regionView';
-import { getData } from '../model';
+import { filterOption, filterCountries, regionState } from './regionView';
+
 import { showPage, currPage, showSpecificPage } from './paginationView';
-import {
-  favoriteCountryMark,
-  initFavorites,
-  favoriteState,
-  getLocalStorage,
-  favBtn,
-} from './favoritesView';
+import { initFavorites, getLocalStorage, favBtn } from './favoritesView';
 import { backBtn, searchState, searchView, renderSearch } from './searchView';
 const country = document.querySelector('.grid-items');
 
@@ -102,8 +91,18 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
 
       const countryName =
         e.currentTarget.childNodes[3].firstElementChild.innerText;
+
       countryData.forEach(country => {
         if (countryName.toLowerCase() === country.name.common.toLowerCase()) {
+          let borderCountryName = [];
+          countryData.map(item => {
+            country.borders.map(border => {
+              if (!border) return 'No Border';
+              if (border === item.cioc) {
+                borderCountryName.push(item.name.common);
+              }
+            });
+          });
           countryView(
             country.flags.png,
             country.name.common,
@@ -115,7 +114,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
             country.tld,
             country.currencies,
             country.languages,
-            country.borders
+            borderCountryName ? borderCountryName : []
           );
           const back = document.querySelector('.back');
           const countryViews = document.querySelector('.country-view');
@@ -123,7 +122,6 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
           // back button
           back.addEventListener('click', () => {
             favBtn.style.display = 'block';
-            console.log('searchState', searchState.status);
             countryViews.innerHTML = '';
             countryViews.style.display = 'none';
             // getData(data);

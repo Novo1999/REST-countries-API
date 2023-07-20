@@ -5,7 +5,7 @@ import { filterOption, filterCountries, regionState } from './regionView';
 import { showPage, currPage, showSpecificPage } from './paginationView';
 import { initFavorites, getLocalStorage, favBtn } from './favoritesView';
 import { backBtn, searchState, searchView, renderSearch } from './searchView';
-const country = document.querySelector('.grid-items');
+export const country = document.querySelector('.grid-items');
 
 export function countryView(
   img,
@@ -28,7 +28,7 @@ export function countryView(
       <img src="${img}" alt="flag" />
     </div>
     <div class="country-details">
-      <div>
+      <div class="country-cont">
         <h1 class="country-name">${name}</h1>
         <p class=" native"><span class="bold">Native Name:</span>${
           native ? Object.entries(native)[0][1].official : 'N/A'
@@ -74,7 +74,6 @@ function borderCountries(border) {
     const newBorder = document.createElement('span');
     newBorder.className = 'border-country';
     const borderContent = document.createTextNode(border);
-
     newBorder.appendChild(borderContent);
     borderCountry.appendChild(newBorder);
   });
@@ -96,8 +95,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
         if (countryName.toLowerCase() === country.name.common.toLowerCase()) {
           let borderCountryName = [];
           countryData.map(item => {
-            country.borders.map(border => {
-              if (!border) return 'No Border';
+            country.borders?.map(border => {
               if (border === item.cioc) {
                 borderCountryName.push(item.name.common);
               }
@@ -114,7 +112,7 @@ export function renderSelectedCountry(countryData, data, countriesPerPage) {
             country.tld,
             country.currencies,
             country.languages,
-            borderCountryName ? borderCountryName : []
+            borderCountryName
           );
           const back = document.querySelector('.back');
           const countryViews = document.querySelector('.country-view');

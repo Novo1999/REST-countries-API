@@ -1,11 +1,6 @@
 import { state } from '../model';
 import { view } from './View';
-import {
-  favoriteCountryMark,
-  favoriteState,
-  initFavorites,
-  storage,
-} from './favoritesView';
+import { favoriteCountryMark, initFavorites } from './favoritesView';
 import { getLocalStorage } from './favoritesView';
 import { renderSelectedCountry } from './countryView';
 export const pagBtn = document.querySelector('.pagination');

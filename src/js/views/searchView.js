@@ -7,11 +7,8 @@ import {
   favoriteState,
   getLocalStorage,
   initFavorites,
-  renderLocalStorageFavorites,
-  showFavorites,
-  showFavoritesState,
 } from './favoritesView';
-import { renderSelectedCountry } from './countryView';
+import { renderSelectedCountry, country } from './countryView';
 
 export const searchState = {
   status: false,
@@ -66,6 +63,7 @@ export function renderSearch(data, query) {
   backBtn.style.display = 'block';
   pagBtn.style.display = 'none';
   view._parentElement.innerHTML = '';
+  country.innerHTML = '';
   data.forEach(country => {
     if (country.name.common.toLowerCase().includes(query.toLowerCase())) {
       view.renderCountries(
